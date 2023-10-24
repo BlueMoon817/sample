@@ -25,7 +25,7 @@ section{margin-bottom:20px;}
 h1{font-size:23px;font-weight:700;color:#eee;text-align:center;line-height:80px;}
 h2{padding:7px;font-size:18px;font-weight:700;color:#555;border-bottom:2px solid #555;scroll-margin-top:100px}
 h3{position:relative;padding:7px;font-size:14px;font-weight:700;color:#2d2d2d;scroll-margin-top:100px;}
-.ch_items{border-bottom:1px solid #999;}
+.ch_items{border-bottom:1px solid #999;cursor: pointer;}
 .sub {overflow:hidden;height:0;}
 .sub ul{padding:10px 0;height:auto;border-top:1px solid rgba(0,0,0,0.3);box-sizing: border-box;}
 .sub li{display:block;border-bottom:1px solid #fff;line-height:30px;padding-left:15px;box-sizing: border-box;}
@@ -435,19 +435,20 @@ footer strong{text-transform:uppercase}
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
   <script>
-    $('.ic_arrow').click(function(){
+    $('.ch_items').click(function(){
      let h;
+		 console.log($(this).siblings('.sub'))
       $('.sub').stop().animate({height: 0},200);
       
-      if($(this).parents('.ch_items').hasClass('is_act')){
+      if($(this).hasClass('is_act')){
         h=0
         $('.ch_items').removeClass('is_act');
       }else{
-        h=$(this).parent().siblings('.sub').children('ul').outerHeight();
+        h=$(this).find('.sub').children('ul').outerHeight();
         $('.ch_items').removeClass('is_act');
-        $(this).parents('.ch_items').addClass('is_act');
+        $(this).addClass('is_act');
       }
-      $(this).parent().siblings('.sub').stop().animate({height: h+'px'},300);
+      $(this).find('.sub').stop().animate({height: h+'px'},300);
     });
   </script>
 </body>

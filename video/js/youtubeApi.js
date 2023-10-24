@@ -1,4 +1,5 @@
-(function (win) {
+  (function(){
+  
   // ** youtube API 불러오기 **
   // 태그 생성
   let tag = document.createElement('script');
@@ -33,12 +34,12 @@
     // event.target.playVideo(); //자동재생
 
     // ex) 스크롤 이벤트의 경우
-    win.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function () {
       // 자동재생 되지 않을 범위값 구하기  
       let v_section1 = section05 * 4 - 200;
       let v_section2 = section05 * 5 - 350;
       // 현재 스크롤 위치
-      curr = win.scrollY;
+      curr = window.scrollY;
       // 플레이 중지 될 조건
       if (curr > v_section2 || curr < v_section1) {
         player.stopVideo();
@@ -58,6 +59,5 @@
       //YT.PlayerState.ENDED 플레이어가 끝났을 때 작성한 동작이 실행된다.
     }
   }
-  win.addEventListener('load', onYouTubeIframeAPIReady);
-  
-})(window)
+  window.addEventListener('load', onYouTubeIframeAPIReady);
+  })();

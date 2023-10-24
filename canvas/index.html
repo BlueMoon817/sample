@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>TM팀 스터디 Index</title>
+  <style>
+    @charset "utf-8";
+
+    /* Common */
+    body,
+    div,
+    dl,
+    dt,
+    dd,
+    ul,
+    ol,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    table,
+    th,
+    td,
+    form,
+    fieldset,
+    legend,
+    textarea,
+    input,
+    select,
+    textarea,
+    button,
+    article,
+    aside,
+    dialog,
+    footer,
+    header,
+    section,
+    footer,
+    nav,
+    figure,
+    main {
+      margin: 0;
+      padding: 0
+    }
+
+    article,
+    aside,
+    dialog,
+    footer,
+    header,
+    section,
+    footer,
+    nav,
+    figure,
+    main {
+      display: block
+    }
+
+    html,
+    body {
+      height: 100%;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none
+    }
+
+    body,
+    input,
+    select,
+    textarea,
+    button {
+      font-family: '나눔고딕', NanumGothic, '맑은 고딕', 'Malgun Gothic', '돋움', Dotum, '굴림', Gulim, Helvetica;
+      font-size: 12px;
+      color: #333;
+      line-height: 1.2
+    }
+
+    fieldset,
+    li,
+    img {
+      border: 0;
+      vertical-align: top
+    }
+
+    ul,
+    ol {
+      list-style: none
+    }
+
+    button {
+      overflow: visible;
+      border: 0;
+      background-color: transparent;
+      cursor: pointer
+    }
+
+    button::-moz-focus-inner {
+      padding: 0;
+      border: 0
+    }
+
+    address,
+    caption,
+    em {
+      font-style: normal
+    }
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: #000;
+      text-decoration: none
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0
+    }
+
+    hr {
+      display: none
+    }
+
+    .blind,
+    caption span,
+    legend {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      font-size: 1px;
+      line-height: 100px;
+      white-space: nowrap
+    }
+
+    /* index */
+    body {
+      padding: 0 15px;
+      word-wrap: break-word;
+      word-break: break-all
+    }
+
+    header {
+      padding: 10px 0
+    }
+
+    h1 {
+      font-size: 18px
+    }
+
+    h1:before {
+      display: inline;
+      content: '['
+    }
+
+    h1:after {
+      display: inline;
+      content: ']'
+    }
+
+    h2 {
+      clear: both;
+      padding: 30px 0 5px;
+      border-bottom: 3px solid #333;
+      font-size: 16px
+    }
+
+    h3 {
+      clear: both;
+      padding: 30px 0 5px;
+      border-bottom: 1px solid #333;
+      font-size: 14px
+    }
+
+    .markup,
+    .guide {
+      margin-bottom: 50px
+    }
+
+    .markup li {
+      border-bottom: 1px solid #dfdfdf
+    }
+
+    .markup li a {
+      position: relative;
+      display: block;
+      padding: 8px 30px 6px 2px
+    }
+
+    .markup li a:after {
+      position: absolute;
+      right: 0;
+      color: #909090;
+      font-weight: bold;
+      content: ' >';
+    }
+
+    .markup li span {
+      margin-left: 5px;
+      font-size: 11px;
+      color: #909090
+    }
+
+    .markup li .dsc:before {
+      display: inline;
+      padding: 0 3px;
+      content: '('
+    }
+
+    .markup li .dsc:after {
+      display: inline;
+      padding: 0 3px;
+      content: ')'
+    }
+
+    .markup li .new,
+    .markup li .up,
+    .markup li .etc,
+    .markup li .del,
+    .markup li .pop {
+      display: inline;
+      height: 14px;
+      padding: 1px 2px;
+      border-radius: 3px;
+      font-family: verdana;
+      font-size: 11px;
+      font-weight: normal;
+      color: #fff;
+      line-height: 14px;
+      vertical-align: middle
+    }
+
+    .markup li .new {
+      background: #fd3939
+    }
+
+    .markup li .up {
+      background: #45a7fb
+    }
+
+    .markup li .etc {
+      background: #2fbf6d
+    }
+
+    .markup li .del {
+      background: #a5a5a5
+    }
+
+    .markup li .pop {
+      border: 1px solid #909090;
+      background: #fff;
+      color: #909090
+    }
+
+    .guide li {
+      position: relative;
+      padding: 5px 2px 5px 20px
+    }
+
+    .guide li:before {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      content: '•'
+    }
+
+    .guide li em {
+      display: inline-block;
+      margin: 0 5px 0 -5px;
+      padding: 0 5px;
+      background: #f4f4f4
+    }
+
+    footer {
+      clear: both;
+      padding: 10px;
+      background: #f4f4f4;
+      text-align: center
+    }
+
+    dt,
+    dd {
+      display: inline
+    }
+
+    dt:after {
+      display: inline;
+      content: ': '
+    }
+  </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('#content a').each(function () {
+        $('<span>/ ' + $(this).attr('href') + '</span>').appendTo($(this));
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <header>
+    <h1>JavaScript Interactive 스터디 - 실무편</h1>
+  </header>
+
+  <div id="content">
+    <section class="markup">
+      <h2>캔버스 기초</h2>
+      <ul>
+        <li><a href="./views/basic.html">캔버스 - 기초</a></li>
+        <li><a href="./views/smile.html">스마일 그려보기</a></li>
+        <li><a href="./views/image.html">캔버스 - 이미지</a></li>
+        <li><a href="./views/video1.html">캔버스 - 비디오 렌더링</a></li>
+        <li><a href="./views/video2.html">캔버스 - 비디오 자막 넣기</a></li>
+        <li><a href="./views/video3.html">캔버스 - 비디오 화면 컬러 입히기</a></li>
+        <li><a href="./views/animation1.html">캔버스 - 애니메이션(requestAnimationFrame)</a></li>
+        <li><a href="./views/animation2.html">캔버스 - 애니메이션(setInterval)</a></li>
+        <li><a href="./views/transform1.html">캔버스 - Transform 기초</a></li>
+        <li><a href="./views/transform2.html">캔버스 - Transform scale</a></li>
+        <li><a href="./views/transform3.html">캔버스 - Transform rotate</a></li>
+        <li><a href="./views/drawing_board.html">캔버스 - 그림판 만들기</a></li>
+        <li><a href="./views/interaction.html">캔버스 - 인터렉션 (애니메이션 + transform)</a></li>
+      </ul>
+      <h2>캔버스 활용</h2>
+      <ul>
+        <li><a href="./views/particles_basic.html">Chapter #1 - 파티클 다루기(그리기 + 애니메이션 + 가속도 + svg필터 + resize)</a></li>
+        <li><a href="./views/fireworks.html">Chapter #2 - 불꽃놀이</a></li>
+      </ul>
+    </section>
+  </div>
+  <footer>
+    <p>Hivelab TM팀</p>
+  </footer>
+</body>
+
+</html>

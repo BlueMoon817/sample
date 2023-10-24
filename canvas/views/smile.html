@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스마일이모티콘 그려보기</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    html,body{width:100%;height:100%;}
+    body{display: flex;justify-content: center;align-items: center;}
+    canvas{background-color: #292726;}
+  </style>
+</head>
+<body>
+  <canvas width="300" height="300" >이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  <canvas width="300" height="300" >이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+  <script>
+    const canvas = document.querySelectorAll('canvas');
+    const context = canvas[0].getContext('2d');
+    const context2 = canvas[1].getContext('2d');
+    function 라디안(각도) {
+      return 각도 * Math.PI / 180;
+    }
+    // 스마일1
+    context.beginPath();
+    context.lineWidth = 3;
+    context.arc(150, 150, 50, 0, 라디안(360), false);
+    context.strokeStyle = 'white';
+    context.stroke();
+    context.closePath();
+    context.beginPath();
+    context.arc(135, 140, 5, 0, 라디안(360), false);
+    context.fillStyle = 'white';
+    context.fill();
+    context.closePath();
+    context.beginPath();
+    context.arc(165, 140, 5, 0, 라디안(360), false);
+    context.fillStyle = 'white';
+    context.fill();
+    context.closePath();
+    context.beginPath();
+    context.lineWidth = 3;
+    context.arc(150, 160, 20, 0, 라디안(180), false);
+    context.fillStyle='orange'
+    context.fill();
+    context.closePath();
+
+    //스마일2
+    context2.beginPath();
+    context2.lineWidth = 3;
+    context2.arc(150, 150, 50, 0, 라디안(360), false);
+    context2.strokeStyle = 'white';
+    context2.stroke();
+    context2.closePath();
+    context2.beginPath();
+    context2.moveTo(140, 140);
+    context2.lineTo(125, 145);
+    context2.stroke();
+    context2.moveTo(140, 140);
+    context2.lineTo(125, 135);
+    context2.stroke();
+    context2.closePath();
+    context2.beginPath();
+    context2.moveTo(160, 140);
+    context2.lineTo(175, 145);
+    context2.stroke();
+    context2.moveTo(160, 140);
+    context2.lineTo(175, 135);
+    context2.stroke();
+    context2.closePath();
+    context2.beginPath();
+    context2.lineWidth = 3;
+    context2.arc(150, 160, 20, 0, 라디안(180), false);
+    context2.stroke();
+    context2.closePath();
+
+  </script>
+</body>
+</html>

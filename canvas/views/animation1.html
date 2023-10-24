@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>애니메이션(requestAnimationFrame)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+  
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #555;
+    }
+  
+    canvas {
+      margin: 20px 0;
+      background-color: #eee;
+    }
+  
+    p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  
+    h1 {
+      margin: 10px 0;
+    }
+    button{width: 100px;height: 45px;}
+  </style>
+</head>
+
+<body>
+  <h1>requestAnimationFrame</h1>
+  <p>브라우저가 준비가 된 상태에서만 함수를 실행하므로 퍼포먼스가 매끄럽다.</p>
+  <p>requestAnimationFrame 함수는 디스플레이 주사율에 따라 실행속도가 달라진다.</p>
+  <p>ex) 디스플레이 주사율이 60헤르츠일경우 1초에 60번 실행</p>
+  <canvas width="500" height="300">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  <div class="btn_group">
+    <button class="btn_stop">중지</button>
+    <button class="btn_play">플레이</button>
+  </div>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    const btnStop = document.querySelector('.btn_stop');
+    const btnPlay = document.querySelector('.btn_play');
+    let controls;
+    let xPos = 10;
+    function draw(state){
+      console.log(state);
+      if(state == 'stop'){
+        cancelAnimationFrame(controls);
+      }else if(stop != 'stop'){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+        context.arc(xPos, 150, 10, 0, Math.PI * 2, false);
+        context.fill();
+        if (xPos > canvas.width) {
+          xPos = 0;
+        } else {
+          xPos += 3;
+        }
+        controls=requestAnimationFrame(draw);
+      }
+    }
+    draw(null);
+    btnStop.addEventListener('click', function(){
+      requestAnimationFrame(function () {
+        draw("stop");
+      });
+    });
+    btnPlay.addEventListener('click', function(){
+      cancelAnimationFrame(controls);
+      requestAnimationFrame(draw);
+    });
+  </script>
+</body>
+
+</html>

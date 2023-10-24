@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas - Drawing Board</title>
+  <style>
+    *{margin:0;padding:0;}
+    body{height:100vh; display:flex;justify-content:center;align-items:center;flex-direction: column;}
+    canvas{background-color:#f5f5f5;}
+    h1{text-align:center;}
+    p{margin-top: 10px;}
+    p:nth-of-type(2){margin-bottom: 30px;}
+    .btn_group{width:100%;height:50px;margin-top:30px;display:flex;justify-content:center;align-items:center;}
+    .btn{width:35px;height:35px;cursor:pointer;}
+    button:not(:first-child){margin-left:10px;}
+    .btn[data-color='white']{background:white;}
+    .btn[data-color='black']{background:black;}
+    .btn[data-color='red']{background:red;}
+    .btn[data-color='orange']{background:orange;}
+    .btn[data-color='yellow']{background:yellow;}
+    .btn[data-color='green']{background:green;}
+    .btn[data-color='blue']{background:blue;}
+    .btn[data-color='darkblue']{background:darkblue;}
+    .btn[data-color='purple']{background:purple;}
+    .btn[data-type="image"]{background:url(../images/pawprint.png) no-repeat; width:35px;height:35px;background-size:100%;}
+    .pop_ly{
+      display:none;
+      position:absolute;left:0;top:0;width:100%;height:100vh;
+    }
+    .dimmd{background-color:rgba(0,0,0,0.7);width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
+    .result_image{position:absolute;left:50%;top:50%;transform: translate(-50%, -50%);width:600px; height:400px;}
+    .btn_close{position:absolute;right:50px;top:50px;width:80px;height:35px;}
+    .btn_save, .btn_clear{width:80px;height:35px;cursor:pointer;background-color:#2d2d2d;color:#fff;}
+    .img_box{background-color:#ddd;width:600px;height:400px;}
+  </style>
+</head>
+<body>
+  <h1>그림판</h1>
+  <p>색깔 및 이미지를 선택하여 그림을 그릴 수 있다.</p>
+  <p>그린 캔버스를 이미지로 저장할 수 있다. save -> 우클릭 이미지저장</p>
+  <canvas>이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  <div class="btn_group">
+    <button type="button" class="btn" data-type="color" data-color ="white"></button>
+    <button type="button" class="btn" data-type="color" data-color ="black"></button>
+    <button type="button" class="btn" data-type="color" data-color ="red"></button>
+    <button type="button" class="btn" data-type="color" data-color ="orange"></button>
+    <button type="button" class="btn" data-type="color" data-color ="yellow"></button>
+    <button type="button" class="btn" data-type="color" data-color ="green"></button>
+    <button type="button" class="btn" data-type="color" data-color ="blue"></button>
+    <button type="button" class="btn" data-type="color" data-color ="darkblue"></button>
+    <button type="button" class="btn" data-type="color" data-color ="purple"></button>
+    <button type="button" class="btn" data-type="image"></button>
+  </div>
+  <div class="btn_group2">
+    <button type="button" class="btn_save">Save</button>
+    <button type="button" class="btn_clear">Clear</button>
+  </div>
+  <div class="pop_ly">
+    <div class="dimmd">
+      <button class="btn_close">close</button>
+      <div class="img_box">
+        <div class="result_image"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    const controls = document.querySelector('.btn_group');
+    const btnSave = document.querySelector('.btn_save');
+    const btnPop = document.querySelector('.btn_pop');
+    const btnClose = document.querySelector('.btn_close');
+    const btnClear = document.querySelector('.btn_clear');
+    const popLayer = document.querySelector('.pop_ly');
+    const saveImg = document.querySelector('.result_image');
+    canvas.width=600;
+    canvas.height=400;
+    let drawingMode, saveInfo={brush:'color', colorVal:'black'}, brush='color', colorVal='black'; 
+    const imgEl = new Image();
+    imgEl.src = '../images/pawprint.png';
+
+    function moveHandler(ev){
+      if (!drawingMode) return;
+        switch (saveInfo.brush) {
+          case 'color':
+            context.beginPath();
+            context.fillStyle = saveInfo.colorVal;
+            context.save();
+            context.arc(ev.offsetX, ev.offsetY, 10, 0, Math.PI * 2, false);
+            context.fill();
+            break;
+          case 'image':
+            context.drawImage(imgEl, ev.offsetX, ev.offsetY, 35, 35);
+            break;
+        }
+      }
+    function setColor(ev){
+      if(!brush) return;
+      brush=ev.target.getAttribute('data-type');
+      colorVal=ev.target.getAttribute('data-color');
+      saveInfo={brush, colorVal}
+      return saveInfo;
+    }
+    function createImage(){
+      const url = canvas.toDataURL('image/png');
+      const imgElem = new Image();
+      imgElem.src = url;
+      saveImg.appendChild(imgElem);
+      popLayer.style.display='block';
+    }
+    
+    function downHandler(){
+      drawingMode=true;
+    }
+    
+    function upHandler(){
+      drawingMode = false;
+    }
+    function visPop(){
+      const img = document.querySelector('.img_box img');
+      img.remove();
+      popLayer.style.display='none';
+    }
+    function canvasClear(){
+      context.clearRect(0,0,canvas.width,canvas.height);
+    }
+    canvas.addEventListener('mousedown', downHandler);
+    canvas.addEventListener('mousemove', moveHandler);
+    canvas.addEventListener('mouseup', upHandler);
+    controls.addEventListener('click', setColor);
+    btnSave.addEventListener('click', createImage);
+    btnClose.addEventListener('click', visPop);
+    btnClear.addEventListener('click', canvasClear);
+  </script>
+</body>
+</html>

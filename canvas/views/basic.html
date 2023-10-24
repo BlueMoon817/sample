@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>캔버스 기초와 실습</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    html,body{width:100%;height:100%;}
+    body{padding:100px 50px;display: flex;justify-content:center;align-items: center;box-sizing: border-box;}
+    h1{text-align: center;margin-bottom: 10px;}
+    canvas{background-color: #eee;}
+    .text_area{width:700px;height:500px;overflow-y: auto;box-sizing: border-box;padding:20px 30px 50px;font-size: 13px;background-color: #fcece4;margin-left: 10px;color: #2d2d2d;}
+    .list_items:not(:first-child){margin-top:5px;}
+    .list_items{padding:5px 0;border-bottom: 1px solid #999;}
+    .sub_text_list .list_items{margin-top: 5px;list-style:none;border-bottom:0;padding: 0 0 3px 10px;color: #555;font-size: 12px;}
+    .sub_text_list .list_items:not(:last-child){border-bottom: 1px solid #999;}
+    .depth_text2{padding-left: 10px;color: #555;}
+    .text_desc{word-break:keep-all;}
+    .sub_tit{color: #333;}
+    .text_bold{font-weight: bold;}
+  </style>
+</head>
+<body>
+  <canvas width="500" height="500">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  <div class="text_area">
+    <h1>Note</h1>
+    <ul class="text_list">
+      <li class="list_items">
+        <p class="text_desc">Canvas API는 Javascript와 HTML canvas엘리먼트를 통해 그리픽을 그리기 위한 수단을 제공한다.</p>
+      </li>
+      <li class="list_items"><p class="text_desc">애니메이션, 게임 그래픽, 데이터 시각화, 사진 조작 및 실시간 비디오 처리를 위해 사용된다.</p></li>
+      <li class="list_items"><p class="text_desc">Canvas API는 주로 2D그래픽에 중점을 두고 있으며 WebGL API 또한 canvas엘리먼트를 사용하며,<br> 하드웨어 가속 2D 및 3D 그래픽을 그린다.</p></li>
+      <li class="list_items">
+        <span class="sub_tit text_bold">canvas와 svg의 차이</span>
+        <ul class="sub_text_list">
+          <li class="list_items"><p class="text_desc">- canvas는 비트맵<br> > 픽셀이 많아지면 용량이 커짐</p></li>
+          <li class="list_items"><p class="text_desc">- svg 는 벡터<br> > 점과 점사이를 연산하여 그림<br> > 연산이 많아지면 용량이 커짐</p></li>
+        </ul>
+      </li>
+      <li class="list_items">
+        <span class="sub_tit text_bold">캔버스 기본 값</span>
+        <ul class="sub_text_list">
+          <li class="list_items">
+            <p class="text_desc">- 사이즈(default) : width:300px, height: 150px</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc">- 색상(default) : #000</p>
+          </li>
+        </ul>
+      </li>
+      <li class="list_items">
+        <span class="sub_tit text_bold">캔버스 사이즈 조절시 유의할 점</span>
+        <p class="text_desc">- 크기를 css style로만 조절하는 것은 본래사이즈인 300, 150의 캔버스를 늘리거나 줄이는 것을 의미</p>
+      </li>
+      <li class="list_items">
+        <span class="sub_tit text_bold">캔버스 사이즈 조절하기</span>
+        <p class="text_desc">- 원하는 사이즈의 canvas.width, canvas.height을 먼저 설정.</p>
+        <p class="text_desc">- css의 width, height 값으로 원하는 배수로 설정</p>
+        <p class="text_desc depth_text2">* 2배수 : canvas.width, canvas.height 값의 1/2</p>
+        <p class="text_desc depth_text2">* full화면 고해상도 맞추기 <br>&nbsp;&nbsp;canvas.width, canvas.height 값을 디바이스화면 사이즈보다 크게 설정 <br>&nbsp;&nbsp;css로 width,
+          height의 값을 100%로 적용 <br>&nbsp;&nbsp;모든 해상도에서 화질이 떨어지지 않게 하기 위함</p>
+      </li>
+      <li class="list_items">
+        <p class="text_desc text_bold">canvas의 그려지는 그림은 object가 아니다</p>
+        <p class="text_desc">- canvas에 그려진 요소를 조작할 수 없음.</p>
+        <p class="text_desc">- 노트에 조금씩 달라지는 그림을 그려놓고 빠르게 넘겨 그림이 움직인다고 가정하면,<br> 그 한장면의 그림 자체가 프레임이라고 생각하면 된다.</p>
+      </li>
+      <li class="list_items">
+        <p class="text_desc text_bold">캔버스 코드 작성하기(기초)</p>
+        <ul class="sub_text_list">
+          <li class="list_items">
+            <p class="text_desc text_bold">캔버스 기본 셋팅</p>
+            <p class="text_desc">"const canvas = document.querySelector('canvas');<br>
+            const context = canvas.getContext('2d');"</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">그리기 시작함을 알림(그림그리기 시작시 꼭 필요)</p>
+            <p class="text_desc">"context.beginPath();"</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">fillRect :그리기 !아직 그려진 것 아님!</p>
+            <p class="text_desc">"값의 의미: x좌표, y좌표, width, height</p>
+            <p class="text_desc">"context.fillRect(50, 50, 100, 100);" : 면으로 그리기</p>
+            <p class="text_desc">"context.strokeRect(150, 150, 100, 100);" : 선으로 그리기</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">그리기</p>
+            <p class="text_desc">"context.fill()" : 면으로 그림</p>
+            <p class="text_desc">"context.stroke()" : 선으로 그림</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">clearRect : 지우기</p>
+            <p class="text_desc">"context.clearRect(80, 80, 50, 50);"</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">closePath : path가 종료됨을 알림</p>
+            <p class="text_desc">일러스트레이터에서 라인을 path찍어가면서 그리다가 종료를 안해주면 선이 이어져서 path를 따라오는 것을 생각하면 됨.</p>
+            <p class="text_desc">context.closePath();</p>
+
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">원 그리기(파랑색 원)</p>
+            <p class="text_desc">라디안 함수 : "function 라디안(각도) {
+              return 각도 * Math.PI / 180;
+            }"</p>
+            <p class="text_desc">arc : x좌표, y좌표, 반지름의 크기, 시작도수, 끝도수(라디안값), 시계방향(true), 반시계방향(false:default)</p>
+            <p class="text_desc">"context.beginPath();<br>
+                  context.arc(300, 300, 50, 0, 라디안(360), false);<br>
+                  context.strokeStyle = 'blue';<br>
+                  context.stroke();"</p>
+          </li>
+          <li class="list_items">
+            <p class="text_desc text_bold">호 그리기(빨강색선)</p>
+            <p class="text_desc">
+              "context.beginPath();<br>
+              context.arc(400,400, 50, 0, 라디안(80), false);<br>
+              context.strokeStyle='red';<br>
+              context.stroke();"<br>
+            </p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    function 라디안(각도) {
+      return 각도 * Math.PI / 180;
+    }
+    // fillRect : 면으로 그리기
+    context.fillRect(50,50, 100, 100);
+    context.fillStyle = '#000';
+    context.fillRect(0,0, 100, 100);
+
+    // clearRect : 지우기
+    context.clearRect(80,80,50,50);
+    // strokeRect : 선으로 그리기
+    context.strokeRect(150, 150, 100, 100);
+
+    // beginPath : path 시작
+    context.beginPath();
+    // moveTo : 붓을 옮기는 위치 : 그리는것 아님
+    context.moveTo(100,100);
+    // lineTo : line 시작과 끝 점 : 그리는 것 아님
+    context.lineTo(300, 200);
+    // stroke : 선을 그리기
+    context.stroke();
+    // closePath : path가 종료됨을 알림 
+    context.closePath();
+    // 일러스트레이터에서 라인을 path찍어가면서 그리다가 종료를 안해주면 선이 이어져서 path를 따라오는 것을 생각하면 됨.
+
+    // 호그리기 : 중심점을 잡고 
+    // x좌표, y좌표, 반지름의 크기, 시작도수, 끝도수(라디안값), 시계방향(true), 반시계방향(false:default)
+    context.beginPath();
+    context.arc(400,400, 50, 0, 라디안(80), false);
+    context.strokeStyle='red';
+    context.stroke();
+    context.beginPath();
+    context.arc(300, 300, 50, 0, 라디안(360), false);
+    context.strokeStyle = 'blue';
+    context.stroke();
+
+  </script>
+</body>
+</html>

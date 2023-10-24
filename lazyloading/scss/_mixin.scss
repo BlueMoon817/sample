@@ -1,0 +1,48 @@
+// 중앙정렬
+@mixin set-center-x($type: absolute) {
+  @if ($type ==fixed or $type ==absolute) {
+    position: $type;
+    left: 50%;
+    @include css3-prefix("transform", "translateX(-50%)");
+  }
+}
+
+@mixin set-center-y($type: absolute) {
+  @if ($type ==fixed or $type ==absolute) {
+    position: $type;
+    top: 50%;
+    @include css3-prefix("transform", "translateY(-50%)");
+  }
+}
+
+@mixin set-center($type: absolute) {
+  @if ($type ==fixed or $type ==absolute) {
+    position: $type;
+    top: 50%;
+    left: 50%;
+    @include css3-prefix("transform", "translate(-50%, -50%)");
+  }
+}
+
+// 말줄임 스타일
+@mixin ellipsis($line-num: 1, $display: null) {
+  @if $line-num >1 {
+    display: block; //ie
+    display: -webkit-box;
+    -webkit-line-clamp: $line-num;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  @else {
+    @if $display !=null {
+      display: $display;
+    }
+
+    white-space: nowrap;
+  }
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

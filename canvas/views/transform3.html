@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transform</title>
+  <style>
+    *{margin:0;padding:0;}
+    body{height:100vh; display:flex;justify-content:center;align-items:center;flex-direction: column;}
+    h1{margin-bottom:50px;}
+    canvas{
+      background-color:#f5f5f5;
+    }
+    .text_box{width:500px; margin-top:30px;font-size:13px;color:#555;}
+    p{word-break: keep-all;}
+  </style>
+</head>
+<body>
+  <h1>Transform-rotate</h1>
+  <canvas class="canvas" width="500" height="500"></canvas>
+  <div class="text_box">
+    <p>- rotate의 각도 값은 라디안 값으로 넣어줘야 한다.</p>
+  </div>
+  <script>
+    const canvas=document.querySelector('.canvas');
+    const context=canvas.getContext('2d');
+    let scaleValue = 1;
+    let rotationValue = 0;
+    
+    //라디안 함수
+    function toRadian(deg){
+      return deg * Math.PI/180;
+    }
+    
+    function draw(){
+      // context.clearRect(0,0, canvas.width, canvas.height);
+      context.save();
+      // setTransform => 행렬 
+      //아래의 setTransform은 변환 초기화를 위해 단위행렬을 적용하여 변환 초기값으로 돌려놓은 것.
+      context.setTransform(1,0,0,1,0,0);
+      // == context.resetTransform();
+      context.translate(350,350);
+      context.scale(scaleValue, scaleValue);
+      context.rotate(toRadian(rotationValue));
+      //모든 위치와 변환 설정코드를 작성한 후에 그려주는 코드 작성하기.
+      context.strokeRect(-50,-50, 100, 100);
+      context.restore();
+      
+      scaleValue += 0.05;
+      rotationValue +=1;
+      
+      requestAnimationFrame(draw);
+    }
+    draw();
+    
+    
+  </script>
+</body>
+</html>

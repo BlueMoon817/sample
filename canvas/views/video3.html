@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas - Video2</title>
+  <style>
+    *{margin:0;padding:0;}
+    body{height:100vh; display:flex;justify-content:center;align-items:center;flex-direction: column;}
+    h1{margin-bottom:50px;}
+    canvas{background-color:#f5f5f5;}
+    .video{position:absolute;width:0;height:0;}
+    .btn_group{margin-top: 30px;}
+    button {width: 50px;height: 35px;cursor: pointer;}
+  </style>
+</head>
+<body>
+  <h1>Video</h1>
+  <video class="video" src="../video/sample.mp4" autoplay muted loop ></video>
+  <canvas width="480" height="324">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  <div class="btn_group">
+    <button type="button" class="btn" data-type="color" data-color="red">R</button>
+    <button type="button" class="btn" data-type="color" data-color="green">G</button>
+    <button type="button" class="btn" data-type="color" data-color="blue">B</button>
+    <button type="button" class="btn" data-color="">reset</button>
+  </div>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    context.font = 'bold 20px serif';
+    context.fillStyle = 'white';
+    
+    const videoElem = document.querySelector('.video');
+    videoElem.addEventListener('canplaythrough', render);
+    
+    const btnGroup = document.querySelector('.btn_group');
+    let imageData, particle, colorValue, leng;
+    const particles=[];
+    //time = 초
+    function render(){
+      context.drawImage(videoElem, 0, 0, 480, 324);
+      imageData = context.getImageData(0,0,480, 324);
+      
+      // 비디오의 data 배열은 픽셀 개수의 4배이다. rgba의 4개의 숫자로 1픽셀이 표현되기 때문
+      leng = imageData.data.length/4;
+      
+      for(let i=0; i<leng; i+=1){
+        switch(colorValue){
+          case 'red' :
+            imageData.data[i*4 + 0] = 255;
+            break;
+          case 'green': 
+            imageData.data[i*4 + 1] = 255; 
+            break;
+          case 'blue' : 
+            imageData.data[i*4 + 2] = 255; 
+            break;
+        }
+      }
+      context.putImageData(imageData, 0, 0);
+      requestAnimationFrame(render);
+    }
+    btnGroup.addEventListener('click', function(ev){
+      colorValue=ev.target.getAttribute('data-color');
+    });
+    
+  </script>
+</body>
+</html>

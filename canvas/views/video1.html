@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas - Video1</title>
+  <style>
+    *{margin:0;padding:0;}
+    body{height:100vh; display:flex;justify-content:center;align-items:center;flex-direction: column;}
+    h1{margin-bottom:50px;}
+    canvas{background-color:#f5f5f5;}
+    .video{position:absolute;width:0;height:0;}
+  </style>
+</head>
+<body>
+  <h1>Video</h1>
+  <video class="video" src="../video/sample.mp4" autoplay muted loop ></video>
+  <canvas width="480" height="324">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+  
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    let canPlayState = false;
+    
+    context.textAlign = 'center';
+    context.fillText('비디오 로딩 중..', 300, 200);
+    const videoElem = document.querySelector('.video');
+    videoElem.addEventListener('canplaythrough', render);
+    
+    function render(){
+      context.drawImage(videoElem, 0, 0, 480, 324);
+      requestAnimationFrame(render);
+    }
+    
+  </script>
+</body>
+</html>

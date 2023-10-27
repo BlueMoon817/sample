@@ -43,7 +43,7 @@ function debounce(callback, wait) {
   ytbArr.forEach((item, index) => {
     item.setAttribute("id", "player" + index); // 아이디 값 추가
     idArr.push("player" + index); // 아이디 값 배열에 넣기
-    videoIdArr.push(item.getAttribute("data-videoId")); // 동영상 url 배열에 넣기
+    videoIdArr.push(item.getAttribute("data-videoid")); // 동영상 url 배열에 넣기
   });
   let curr = window.scrollY;
   let player, idx, playVideoFunc, pauseFunc;

@@ -38,12 +38,12 @@ function debounce(callback, wait) {
   firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
   // ** 플레이어 설정 **
   let ytbArr = document.querySelectorAll('.youtube');
-  let idArr = [], urlArr = [], objArr = [];
+  let idArr = [], videoIdArr = [], objArr = [];
   // 아이디 추가, 생성될객체 아이디배열생성, 가져올 11자리 아이디 배열 생성 
   ytbArr.forEach((item, index) => {
     item.setAttribute("id", "player" + index); // 아이디 값 추가
     idArr.push("player" + index); // 아이디 값 배열에 넣기
-    urlArr.push(item.getAttribute("data-url")); // 동영상 url 배열에 넣기
+    videoIdArr.push(item.getAttribute("data-videoId")); // 동영상 url 배열에 넣기
   });
   let curr = window.scrollY;
   let player, idx, playVideoFunc, pauseFunc;
@@ -72,12 +72,12 @@ function debounce(callback, wait) {
       player = new YT.Player(idArr[i], {
         height: '360', // 영상의 높이 값
         width: '640', // 영상의 너비 값
-        videoId: urlArr[i], // 유튜브 임베드 고유의 id (11자)
+        videoId: videoIdArr[i], // 유튜브 임베드 고유의 id (11자)
         playerVars: {
           'autoplay': i==0? 1 : 0, // autoplay false
           'controls': 1, // constrol false
           'mute': 1, // 음소거
-          'loop': false,   // 반복재생 true
+          'loop': 0,   // 반복재생 true
           'playsinline': 1, // ios환경에서 전체화면으로 재생하지 않기
         },
         events: {

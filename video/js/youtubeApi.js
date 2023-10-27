@@ -74,7 +74,7 @@ function debounce(callback, wait) {
         width: '640', // 영상의 너비 값
         videoId: urlArr[i], // 유튜브 임베드 고유의 id (11자)
         playerVars: {
-          'autoplay': 0, // autoplay false
+          'autoplay': i==0? 1 : 0, // autoplay false
           'controls': 1, // constrol false
           'mute': 1, // 음소거
           'loop': false,   // 반복재생 true

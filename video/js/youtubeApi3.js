@@ -6,10 +6,12 @@ function debounce(callback, wait) {
     timeout = setTimeout(() => callback.apply(context, args), wait);
   }
 }
+
 (function () {
   let body = document.querySelector('body');
   let sectionArr = document.querySelectorAll('.section');
   let sectionOb;
+  
   // 섹션 초기화 함수
   let init = function () {
     body = document.querySelector('body');
@@ -23,27 +25,33 @@ function debounce(callback, wait) {
     }
   }
   init();
-  //구현
+  
   // ** youtube API 불러오기 **
   // 태그 생성
   let scriptTag = document.createElement('script');
+  
   // script tag의 src 속성 할당
   scriptTag.src = "https://www.youtube.com/iframe_api";
+  
   // 생성된 script 태그를 script태그들의 첫번째에 위치시키기
   let firstScriptTag = document.querySelector('.ytb_script');
   firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+  
   // ** 플레이어 설정 **
   let ytbArr = document.querySelectorAll('.youtube');
   let idArr = [], videoIdArr = [], objArr = [];
+  
   // 아이디 추가, 생성될객체 아이디배열생성, 가져올 11자리 아이디 배열 생성 
   ytbArr.forEach((item, index) => {
     item.setAttribute("id", "player" + index); // 아이디 값 추가
     idArr.push("player" + index); // 아이디 값 배열에 넣기
     videoIdArr.push(item.getAttribute("data-videoid")); // 동영상 url 배열에 넣기
   });
+  
   let curr = window.scrollY;
   let player, idx, playVideoFunc, pauseFunc;
-  // iframe을 만들어주는 함수, onReady에서 실행할 함수에 들어가는 함수나 요소들은 이 함수 안에 만들어 주기 => 객체 생성 완료시점을 컨트롤하기 어렵기 때문
+  
+  // iframe을 만들어주는 함수
   let onYouTubeIframeAPIReady = function () {
     objArr = [];
 
@@ -66,8 +74,8 @@ function debounce(callback, wait) {
       });
       objArr.push(player);
     }
-
   }
+  // 스크롤에 따른 영상 플레이 실행함수
   playVideoFunc = function (idx) {
     for (let i = 0; i < objArr.length; i += 1) {
       if (curr >= sectionOb[i].sectionOffsetTop && curr < sectionOb[i].sectionOffsetBottom) {
@@ -79,6 +87,7 @@ function debounce(callback, wait) {
       }
     }
   }
+  //영상재생중지 실행함수
   pauseFunc = function (notPlay) {
     for (let x = 0; x < objArr.length; x += 1) {
       if (x !== notPlay) {
@@ -86,6 +95,7 @@ function debounce(callback, wait) {
       }
     }
   }
+  //iframe생성이 완료된 후 실행할 함수이름
   let onPlayerReady = function () {
     window.addEventListener('resize', debounce(() => {
       init();

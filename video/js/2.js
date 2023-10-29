@@ -6,8 +6,6 @@ function debounce(callback, wait) {
     timeout = setTimeout(() => callback.apply(context, args), wait);
   }
 }
-
-
 (function () {
   let body = document.querySelector('body');
   let sectionArr = document.querySelectorAll('.section');
@@ -25,28 +23,11 @@ function debounce(callback, wait) {
     }
   }
   init();
-  
-  function VideoFunc () {
-    this.stopVd=function(notPlay){
-      for (let x = 0; x < objArr.length; x += 1) {
-        if (x !== notPlay) {
-          objArr[x].pauseVideo();
-        }
-      }
-    }
-    this.sectionChk = function(idx){ 
-      for (let i = 0; i < objArr.length; i += 1) {
-        if (curr >= sectionOb[i].sectionOffsetTop && curr < sectionOb[i].sectionOffsetBottom) {
-          if (idx === i) return;
-          this.stopVd(i);
-          idx = i;
-          objArr[i].playVideo();
-          break;
-        }
-      }
-    }
-  }
-  const effectOb= new VideoFunc();
+  //구현
+  // 재생중일 때 배경 인터렉션
+  // 재생 시점 컨트롤 버튼 구현
+  // 중간 부터 1분만 재생
+  // 재생 종료 시 다시 보기 버튼 출력
   // ** youtube API 불러오기 **
   // 태그 생성
   let scriptTag = document.createElement('script');
@@ -65,11 +46,28 @@ function debounce(callback, wait) {
     videoIdArr.push(item.getAttribute("data-videoid")); // 동영상 url 배열에 넣기
   });
   let curr = window.scrollY;
-  let player, idx;
+  let player, idx, playVideoFunc, pauseFunc;
   // iframe을 만들어주는 함수, onReady에서 실행할 함수에 들어가는 함수나 요소들은 이 함수 안에 만들어 주기 => 객체 생성 완료시점을 컨트롤하기 어렵기 때문
   let onYouTubeIframeAPIReady = function () {
     objArr = [];
-
+    playVideoFunc = function (idx) {
+      for (let i = 0; i < objArr.length; i += 1) {
+        if (curr >= sectionOb[i].sectionOffsetTop && curr < sectionOb[i].sectionOffsetBottom) {
+          if (idx === i) return;
+          pauseFunc(i);
+          idx = i;
+          objArr[i].playVideo();
+          break;
+        }
+      }
+    }
+    pauseFunc = function (notPlay) {
+      for (let x = 0; x < objArr.length; x += 1) {
+        if (x !== notPlay) {
+          objArr[x].pauseVideo();
+        }
+      }
+    }
     for (var i = 0; i < ytbArr.length; i += 1) {
       player = new YT.Player(idArr[i], {
         height: '360', // 영상의 높이 값
@@ -85,10 +83,9 @@ function debounce(callback, wait) {
         events: {
           'onReady': onPlayerReady,  // onReady 상태일 때 작동하는 function이름
           // 'onStateChange':onPlayerReady// 영상상태체크함수 : onStateChange 상태일 때 작동하는 function이름
-        },
+        }
       });
       objArr.push(player);
-      
     }
 
   }
@@ -96,12 +93,12 @@ function debounce(callback, wait) {
   let onPlayerReady = function () {
     window.addEventListener('resize', debounce(() => {
       init();
-    }, 600),{passive:true});
+    }, 600));
     window.addEventListener('scroll', debounce(() => {
       // 현재 스크롤 위치
       curr = window.scrollY;
-      effectOb.sectionChk(idx);
-    }, 200),{passive:true});
+      playVideoFunc(idx);
+    }, 300));
   }
 
   window.addEventListener('load', onYouTubeIframeAPIReady);

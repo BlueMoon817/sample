@@ -102,16 +102,16 @@ let onYouTubeIframeAPIReady = function () {
 window.addEventListener('load', function () {
   onYouTubeIframeAPIReady();
   init();
-  window.addEventListener('resize', debounce(() => {
-    if (!loadComplete) return
-    init();
-    console.log('resize');
-  }, 600));
-  window.addEventListener('scroll', debounce(() => {
-    // 현재 스크롤 위치
-    if (!loadComplete) return
-    curr = window.scrollY;
-    playVideoFunc(idx);
-    console.log('scroll');
-  }, 300));
 });
+window.addEventListener('resize', debounce(() => {
+  if (!loadComplete) return
+  init();
+  console.log('resize');
+}, 600));
+window.addEventListener('scroll', debounce(() => {
+  // 현재 스크롤 위치
+  if (!loadComplete) return
+  curr = window.scrollY;
+  playVideoFunc(idx);
+  console.log('scroll');
+}, 300));

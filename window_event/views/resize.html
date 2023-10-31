@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>resize event</title>
+  <style>
+    html,body{width: 100%;height: 100%;}
+    *{margin: 0;padding: 0;}
+    .section{display: flex;justify-content: center;align-items: center;flex-direction: column;}
+    h2{font-size: 50px;}
+  </style>
+</head>
+<body>
+  <section class="section" style="height:100%;background-color:#e79c9c;">
+    <h2>Section 01</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <section class="section" style="height:100%;background-color:#bfe7cb;">
+    <h2>Section 02</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <section class="section" style="height:70%;background-color:#c9c9e0;">
+    <h2>Section 03</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <section class="section" style="height:40%;background-color:#e0c2ce;">
+    <h2>Section 04</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <section class="section" style="height:80%;background-color:#e7ba9c;">
+    <h2>Section 05</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <section class="section" style="height:100%;background-color:#979494;">
+    <h2>Section 06</h2>
+    <span class="txt window_width"></span>
+    <span class="txt window_height"></span>
+  </section>
+  <script src="../js/resize.js"></script>
+</body>
+</html>

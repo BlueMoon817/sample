@@ -27,15 +27,22 @@ let init = function () {
 
   
   // ** youtube API 불러오기 **
-  // 태그 생성
-  let scriptTag = document.createElement('script');
-  // script tag의 src 속성 할당
-  scriptTag.src = "https://www.youtube.com/iframe_api";
-  
-  // 생성된 script 태그를 script태그들의 첫번째에 위치시키기
-  let firstScriptTag = document.querySelector('.ytb_script');
-  firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+// 태그 생성
+let scriptTag = document.createElement('script');
 
+// script tag의 src 속성 할당
+scriptTag.src = "https://www.youtube.com/iframe_api";
+
+// 생성된 script 태그를 script태그들의 첫번째에 위치시키기
+let firstScriptTag = document.querySelector('.ytb_script');
+firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+
+  let scriptArr = document.querySelectorAll('script');
+  scriptArr
+  for(let i=0; i<scriptArr.length; i+=1){
+    scriptArr[i].removeAttribute("async");
+    scriptArr[i].setAttribute("defer","true");
+  }
   
   // ** 플레이어 설정 **
   let ytbArr = document.querySelectorAll('.youtube');
@@ -108,10 +115,10 @@ window.addEventListener('resize', debounce(() => {
   init();
   console.log('resize');
 }, 600));
-window.addEventListener('scroll', debounce(() => {
+window.addEventListener('scroll', function(){
   // 현재 스크롤 위치
   if (!loadComplete) return
   curr = window.scrollY;
   playVideoFunc(idx);
   console.log('scroll');
-}, 300));
+});

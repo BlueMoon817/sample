@@ -1,5 +1,5 @@
 import CanvasOption from './components/CanvasOption.js';
-import Particle from './components/Particle.js';
+import Particle from './components/Particle1.js';
 import { randomNumBetween, hypotenuse } from './components/utils.js';
 import Tail from './components/tail.js';
 import Spark from './components/Spark.js';

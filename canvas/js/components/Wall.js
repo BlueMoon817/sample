@@ -19,7 +19,7 @@ export default class Wall {
       }
       this.width = App.height * this.sizeX;
       this.height= App.height;
-      this.gapY=randomNumBetween(App.height * 0.15, App.height * 0.35);
+      this.gapY=randomNumBetween(App.height * 0.25, App.height * 0.55);
       this.x=App.width;
       this.vx = -5
       // -this.height
@@ -28,8 +28,8 @@ export default class Wall {
       this.y2 = this.y1 + this.height + this.gapY;
       this.generatedNext=false;
       this.gapNextX = App.width * randomNumBetween(0.4, 0.55);
-      this.boundingBox1 = new BoundingBox(this.x + 30, this.y1+30, this.width - 60, this.height- 60);
-      this.boundingBox2 = new BoundingBox(this.x + 30, this.y2+30, this.width - 60, this.height- 60);
+      this.boundingBox1 = new BoundingBox(this.x + 30, this.y1+30, this.width - 40, this.height- 40);
+      this.boundingBox2 = new BoundingBox(this.x + 30, this.y2+30, this.width - 40, this.height- 40);
     }
     get isOutside(){
       return this.x + this.width < 0

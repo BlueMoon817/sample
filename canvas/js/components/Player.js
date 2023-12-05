@@ -6,9 +6,9 @@ export default class Player{
       this.x= App.width * 0.1
       this.y= App.height / 2
       this.width = 60;
-      this.height = this.width * (this.img.height / (this.img.width / 15))
+      this.height = this.width * (this.img.height / (this.img.width / 20))
       
-      this.boundingBox = new BoundingBox(this.x + 10, this.y + 16, this.width - 20, this.height-20);
+      this.boundingBox = new BoundingBox(this.x + 10, this.y + 20, this.width - 22, this.height-20);
       this.counter =1;
       this.frameX=0;
       

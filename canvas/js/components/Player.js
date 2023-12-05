@@ -5,17 +5,17 @@ export default class Player{
       this.img = document.querySelector('#bird-img');
       this.x= App.width * 0.1
       this.y= App.height / 2
-      this.width = 130;
+      this.width = 60;
       this.height = this.width * (this.img.height / (this.img.width / 15))
       
       this.boundingBox = new BoundingBox(this.x + 10, this.y + 16, this.width - 20, this.height-20);
       this.counter =1;
       this.frameX=0;
       
-      this.vy= -10;
-      this.gravity=0.3;
+      this.vy= -7;
+      this.gravity=0.2;
       App.canvas.addEventListener('click', () =>{
-        this.vy += -5;
+        this.vy += -4;
       });
   }
   

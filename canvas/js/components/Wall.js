@@ -21,13 +21,13 @@ export default class Wall {
       this.height= App.height;
       this.gapY=randomNumBetween(App.height * 0.15, App.height * 0.35);
       this.x=App.width;
-      this.vx = -6
+      this.vx = -5
       // -this.height
       // App.height - this.gapY - this.height
       this.y1 = -this.height + randomNumBetween(30, App.height - this.gapY- 30);
       this.y2 = this.y1 + this.height + this.gapY;
       this.generatedNext=false;
-      this.gapNextX = App.width * randomNumBetween(0.6, 0.75);
+      this.gapNextX = App.width * randomNumBetween(0.4, 0.55);
       this.boundingBox1 = new BoundingBox(this.x + 30, this.y1+30, this.width - 60, this.height- 60);
       this.boundingBox2 = new BoundingBox(this.x + 30, this.y2+30, this.width - 60, this.height- 60);
     }

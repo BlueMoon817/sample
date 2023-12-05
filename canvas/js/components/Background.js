@@ -16,8 +16,8 @@ export default class Background{
         if(this.rightPos.x + this.width < 0){
             this.rightPos.x = this.leftPos.x + this.width -4
         }
-        // this.leftPos.x += this.speed;
-        // this.rightPos.x += this.speed;
+        this.leftPos.x += this.speed;
+        this.rightPos.x += this.speed;
     }
     draw(){
         App.context.drawImage(

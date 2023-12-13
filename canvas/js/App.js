@@ -22,7 +22,6 @@ export default class App{
         ]
         this.gameHandler = new GameHandler(this);
         this.reset();
-
     }
     reset(){
         this.walls = [new Wall({ type: 'SMALL' })];

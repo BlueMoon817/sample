@@ -33,7 +33,7 @@ function render(){
     now = Date.now();
     delta = now - then;
     if(delta< interval) return;
-    context.clearRect(0,0,canvasWidth,canvasHeight);
+    context.clearRect(0,0, canvas.width, canvas.height);
 		confetti({
     	x : 0.5,
     	y : 0.5,
@@ -42,6 +42,7 @@ function render(){
   	});
 		
     for(let i = particles.length-1; i>=0; i-=1){
+      context.scale(dpr,dpr);
       particles[i].update();
       particles[i].draw(context);
 			if(particles[i].opacity < 0){ 

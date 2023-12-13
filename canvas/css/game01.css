@@ -10,7 +10,7 @@ html,body{
 .asset-img{display: none;}
 canvas{
     width:100vmin;
-    height:75vmin;
+    height:100vmin;
 }
 main{
     position:relative;

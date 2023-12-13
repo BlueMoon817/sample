@@ -1,7 +1,7 @@
 import Particle from './components/Particle3.js';
 const canvas=document.querySelector('.canvas');
 const context = canvas.getContext('2d');
-const dpr = window.devicePixelRatio>1? 2:1;
+const dpr = 1;
 
 let canvasWidth = innerWidth;
 let canvasHeight = innerHeight;
@@ -33,7 +33,7 @@ function render(){
     now = Date.now();
     delta = now - then;
     if(delta< interval) return;
-    context.clearRect(0,0,canvasWidth,canvasHeight);
+    context.clearRect(0,0, canvas.width, canvas.height);
 		confetti({
     	x : 0,
     	y : 0,
@@ -47,6 +47,7 @@ function render(){
     	degree:135
   	})
     for(let i = particles.length-1; i>=0; i-=1){
+      context.scale(dpr,dpr);
       particles[i].update();
       particles[i].draw(context);
 			if(particles[i].opacity < 0){ 
